@@ -13,7 +13,7 @@ class A_PredicateTest {
   @Test
   @Disabled
   public void a_predicate1() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = str -> str.length() > 4;
 
     Assertions.assertTrue(pred.test("abcde"));
     Assertions.assertFalse(pred.test("abcd"));
@@ -23,7 +23,7 @@ class A_PredicateTest {
   @Test
   @Disabled
   public void a_predicate2() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = str -> str.isEmpty();
 
     Assertions.assertTrue(pred.test(""));
     Assertions.assertFalse(pred.test("a"));
@@ -38,7 +38,7 @@ class A_PredicateTest {
   @Test
   @Disabled
   public void a_predicate3() {
-    Predicate<String> pred = null; // TODO
+    Predicate<String> pred = String::isEmpty;
 
     Assertions.assertTrue(pred.test(""));
     Assertions.assertFalse(pred.test("a"));
@@ -59,7 +59,7 @@ class A_PredicateTest {
     Predicate<String> startsWithJ = s -> s.startsWith("J");
     Predicate<String> lengthIs7 = s -> s.length() == 7;
 
-    Predicate<String> startsWithJAndLengthIs7 = null; // TODO
+    Predicate<String> startsWithJAndLengthIs7 = startsWithJ.and(lengthIs7);
 
     Assertions.assertFalse(startsWithJAndLengthIs7.test("Hello"));
     Assertions.assertFalse(startsWithJAndLengthIs7.test("HelloJ1"));
@@ -83,7 +83,7 @@ class A_PredicateTest {
     Predicate<String> equalsError = "ERROR"::equals;
     // Note: this could also be: Predicate.isEqual("ERROR")
 
-    Predicate<String> lengthIs9orError = null; // TODO
+    Predicate<String> lengthIs9orError = lengthIs9.or(equalsError); // TODO
 
     Assertions.assertFalse(lengthIs9orError.test("Hello"));
     Assertions.assertTrue(lengthIs9orError.test("Hello J1!"));

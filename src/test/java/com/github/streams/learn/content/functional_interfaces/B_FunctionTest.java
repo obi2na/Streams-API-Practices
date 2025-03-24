@@ -11,7 +11,9 @@ class B_FunctionTest {
   @Test
   @Disabled
   public void function1() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> before = s -> "(" + s;
+    Function<String, String> after = s ->  s + ")";
+    Function<String, String> func = before.compose(after);
 
     assertEquals("(abc)", func.apply("abc"));
   }
@@ -20,7 +22,7 @@ class B_FunctionTest {
   @Test
   @Disabled
   public void function2() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> func = s -> s.toUpperCase();
 
     assertEquals("ABC", func.apply("abc"));
   }
@@ -29,7 +31,7 @@ class B_FunctionTest {
   @Test
   @Disabled
   public void function3() {
-    Function<String, String> func = null; // TODO
+    Function<String, String> func = String::toUpperCase;
 
     assertEquals("ABC", func.apply("abc"));
   }
@@ -45,7 +47,7 @@ class B_FunctionTest {
     Function<String, String> unNullify = s -> s == null ? "" : s;
     Function<String, Integer> length = String::length;
 
-    Function<String, Integer> lengthBis = null; // TODO
+    Function<String, Integer> lengthBis = unNullify.andThen(length);
 
     assertEquals((Integer) 14, lengthBis.apply("Hello JavaOne!"));
     assertEquals((Integer) 0, lengthBis.apply(""));
